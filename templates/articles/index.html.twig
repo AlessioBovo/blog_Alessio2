@@ -15,9 +15,9 @@
 					<th>Author</th>
 					<th>Date</th>
 					<th>Title</th>
-					<th>Content</th>
+					{# <th>Contenu</th> #}
 					<th>Description</th>
-					<th>Category</th>
+					<th>Categorie</th>
 					<th>actions</th>
 				</tr>
 			</tr>
@@ -31,27 +31,29 @@
 						<td>{{ article.author }}</td>
 						<td>{{ article.date ? article.date|date('Y-m-d') : '' }}</td>
 						<td>{{ article.title }}</td>
-						<td>{{ article.content }}</td>
+						{# <td>{{ article.content }}</td> #}
 						<td>{{ article.description }}</td>
 						<td>{{ article.category }}</td>
 						<td>
-							<a href="{{ path('articles_show', {'id': article.id}) }}">show</a>
+							<a href="{{ path('articles_show', {'id': article.id}) }}">Voir</a>
 							{% if app.user and is_granted('ROLE_ADMIN') %}
-
-								<a href="{{ path('articles_edit', {'id': article.id}) }}">edit</a>
+								/
+								<a href="{{ path('articles_edit', {'id': article.id}) }}">Modifier</a>
 								{%endif%}
 							</td>
 						</td>
 					</tr>
 				{% else %}
 					<tr>
-						<td colspan="8">no records found</td>
+						<td colspan="8">Aucun article trouvé</td>
 					</tr>
 				{% endfor %}
 			</tbody>
 		</tbody>
 	</table>
 	{% if app.user and is_granted('ROLE_ADMIN') %}
-		<a href="{{ path('articles_new') }}">Create new</a>
+		<a href="{{ path('articles_new') }}">Nouveau</a>
 		{%endif%}
+
+
 	{% endblock %}
