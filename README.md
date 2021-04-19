@@ -17,4 +17,5 @@ Les users de base :
 
 - user@blog.com et mdp : user.
 - admin@blog.com et mdp : admin (pour avoir tous les droits).
-
+ 
+ [MCD](src/mcd.png)
