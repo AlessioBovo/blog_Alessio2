@@ -35,7 +35,7 @@ class Articles
     private $title;
 
     /**
-     * @ORM\Column(type="string", length=500)
+     * @ORM\Column(type="text")
      */
     private $content;
 
@@ -164,5 +164,10 @@ class Articles
         }
 
         return $this;
+    }
+
+    public function __toString()
+    {
+        return strval($this->getId());
     }
 }

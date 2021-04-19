@@ -5,10 +5,11 @@ namespace App\Controller;
 use App\Entity\Articles;
 use App\Form\ArticlesType;
 use App\Repository\ArticlesRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
  * @Route("/articles")
@@ -27,6 +28,7 @@ class ArticlesController extends AbstractController
 
     /**
      * @Route("/new", name="articles_new", methods={"GET","POST"})
+     * @IsGranted("ROLE_ADMIN", message="[Accès restreint] - Vous n'avez pas le droit de faire cette action. Veuillez retourner en arrière.")
      */
     public function new(Request $request): Response
     {
@@ -60,6 +62,8 @@ class ArticlesController extends AbstractController
 
     /**
      * @Route("/{id}/edit", name="articles_edit", methods={"GET","POST"})
+     * @IsGranted("ROLE_ADMIN", message="[Accès restreint] - Vous n'avez pas le droit de faire cette action. Veuillez retourner en arrière.")
+
      */
     public function edit(Request $request, Articles $article): Response
     {
@@ -83,7 +87,7 @@ class ArticlesController extends AbstractController
      */
     public function delete(Request $request, Articles $article): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$article->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $article->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($article);
             $entityManager->flush();

@@ -4,49 +4,39 @@
 {% endblock %}
 
 {% block body %}
-	<h1>Articles</h1>
 
-	<table class="table">
-		<tbody>
-			{% if app.user and is_granted('ROLE_ADMIN') %}
-				<tr>
-					<th>Id</th>
-					<td>{{ article.id }}</td>
-				</tr>
-				{%endif%}
-				<tr>
-					<th>Auteur</th>
-					<td>{{ article.author }}</td>
-				</tr>
-				<tr>
-					<th>Date</th>
-					<td>{{ article.date ? article.date|date('Y-m-d') : '' }}</td>
-				</tr>
-				<tr>
-					<th>Titre</th>
-					<td>{{ article.title }}</td>
-				</tr>
-				<tr>
-					<th>Contenu</th>
-					<td>{{ article.content }}</td>
-				</tr>
-				<tr>
-					<th>Description</th>
-					<td>{{ article.description }}</td>
-				</tr>
-				<tr>
-					<th>Catégorie</th>
-					<td>{{ article.category }}</td>
-				</tr>
+	<tbody>
+		<div class="row mx-auto d-block">
+			<h1 class="text-center">
+				{{ article.title }}
+				(ID:
+				{{ article.id}})</h1>
+		</div>
+		<div class="row mx-auto d-block">
 
-			</tbody>
-		</tbody>
-	</table>
+			<h4 class="text-center">
+				{{ article.category }}</h1>
+		</div>
+		<div class="row mx-auto d-block">
 
-	<a href="{{ path('articles_index') }}">Retour à la liste</a>
-	{% if app.user and is_granted('ROLE_ADMIN') %}
-		<a href="{{ path('articles_edit', {'id': article.id}) }}">Modifier</a>
-		{{ include('articles/_delete_form.html.twig') }}
-		{%endif%}
+			<p class="text-center">
+				{{ article.content }}</p>
+		</div>
+		<div class="row mx-auto d-block">
 
-	{% endblock %}
+			<h4>
+				{{ article.author }}</h4>
+		</div>
+	</tbody>
+</tbody>
+
+{# {{ include('./comments/_form.html.twig') }} #}
+
+<a href="{{ path('comments_new')}}">Commenter</a><br>
+<a href="{{ path('articles_index') }}">Retour à la liste</a>
+{% if app.user and is_granted('ROLE_ADMIN') %}
+	<a href="{{ path('articles_edit', {'id': article.id}) }}">Modifier</a>
+	{{ include('articles/_delete_form.html.twig') }}
+	{%endif%}
+
+{% endblock %}
