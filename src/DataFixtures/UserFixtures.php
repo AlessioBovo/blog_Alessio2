@@ -20,6 +20,8 @@ class UserFixtures extends Fixture
     {
         $user = new User();
         $user
+            ->setFirstname('user')
+            ->setLastname('user')
             ->setEmail('user@blog.com')
             ->setPassword($this->encoder->encodePassword($user, 'user'))
             ->setFirstname('user')
